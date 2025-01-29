@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'task_create.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <a href="{{ request.META.HTTP_REFERER|default:'/' }}">Go Back</a>
+
+    <form method="POST">
+        {% csrf_token %}
+        <div class="field">
+            {{ form.as_p }}
+        </div>
+        <button type="submit">Create it</button>
+    </form>
+</div>
+{% endblock %}

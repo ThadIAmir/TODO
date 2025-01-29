@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}Task Details{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'task_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="task-card">
+    <a href="{{ request.META.HTTP_REFERER|default:'/' }}">Go Back</a>
+    <h2>{{ task.title }}</h2>
+    <p class="description">
+        Description: {% if task.description %} {{ task.description }} {% else %} - {% endif %}
+    </p>
+    <p class="status {% if task.complete %}true{% else %}false{% endif %}">
+        Completion Status: {% if task.complete %}Completed{% else %}Not Completed{% endif %}
+    </p>
+</div>
+{% endblock %}

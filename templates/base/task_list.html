@@ -1,0 +1,67 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block title %}todolist{% endblock %}
+
+{% block content %}
+
+    <h1>My To Do List</h1>
+    <br>
+    {% if request.user.is_authenticated %}
+        <h3>Hello {{ request.user }}</h3>
+                
+        <div class="main-page-btn">
+            <a href="{% url 'logout' %}">
+                <button class="logout-button"> 
+                    LogOut
+                </button>
+            </a>
+        </div>
+        <!-- <button class="logout-btn"><a href="{% url 'logout' %}">LogOut</a></button> -->
+    {% else %}
+        <h4><a href="{% url 'login' %}">Login</a></h4>
+    {% endif %}
+    
+    {% include 'seach_bar.html' %}
+
+    <hr>
+    <br>
+
+    <div class="tasks-header-container">
+        <div class="tasks-info">
+            <span class="tasks-header">Not Completed Tasks:</span>
+            <span class="tasks-count">{{ counts }}</span>
+        </div>
+    
+        <div class="create-task">
+            <a href="{% url 'task-create' %}">
+                <button class="create-task-button">Create New Task</button>
+            </a>
+        </div>
+    </div>
+    
+    
+    
+    <table>
+        <tr>
+            <th>Tasks</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+        {% for task in tasks %}
+        <tr>
+            <td class="{% if task.complete %}completed-task{% endif %}">
+                {{ task.title }}
+            </td>
+            <td><a href="{% url 'task-detail' task.id %}">View</a></td>
+            <td><a href="{% url 'task-update' task.id %}">Edit</a></td>
+            <td><a href="{% url 'task-delete' task.id %}">Delete</a></td>
+        </tr>
+        {% empty %}
+            <h3>No Task yet</h3>
+        {% endfor %}
+    </table>
+    <br>
+{% endblock %}
