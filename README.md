@@ -22,7 +22,6 @@ To get started with **TodoList**, follow these steps:
 1. **Clone the repository**:
     ```bash
     git clone https://github.com/ThadIAmir/TODO.git
-    cd TODO
     ```
 
 2. **Create a virtual environment (recommended)**:
