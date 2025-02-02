@@ -4,14 +4,16 @@ Django settings for TODO project.
 import os
 from pathlib import Path
 from decouple import config
+import dj_database_url
 # from .local_settings import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = ['.vercel.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -72,6 +74,8 @@ DATABASES = {
         'PORT': config('DB_PORT'),
     }
 }
+
+
 
 
 # Password validation
