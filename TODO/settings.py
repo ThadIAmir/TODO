@@ -14,6 +14,10 @@ SECRET_KEY = config('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    "web-production-d168.up.railway.app"
+]
+
 
 # Application definition
 
