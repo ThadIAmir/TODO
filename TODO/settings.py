@@ -14,7 +14,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = [
+    'web-production-d168.up.railway.app',  # Railway app URL
+    'localhost',             # For local development
+    '127.0.0.1',             # For local development
+]
 
 
 # Application definition
@@ -141,3 +145,12 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# -----------------
+
+CSRF_TRUSTED_ORIGINS = [
+    'web-production-d168.up.railway.app',  # Railway app URL
+    'http://localhost:8000',        # For local development
+]
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
