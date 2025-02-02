@@ -3,6 +3,8 @@ Django settings for TODO project.
 """
 import os
 from pathlib import Path
+
+import dj_database_url
 from decouple import config
 # from .local_settings import *
 
@@ -63,16 +65,31 @@ WSGI_APPLICATION = 'TODO.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('POSTGRES_DB'),
-        'PASSWORD': config('POSTGRES_PASSWORD'),
-        'HOST': config('PGHOST'),
-        'USER': config('POSTGRES_USER'),
-        'PORT': config('PGPORT'),
-    }
+    'default': dj_database_url.config(default=config('DATABASE_URL'))
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('POSTGRES_DB'),
+#         'PASSWORD': config('POSTGRES_PASSWORD'),
+#         'HOST': config('PGHOST'),
+#         'USER': config('POSTGRES_USER'),
+#         'PORT': config('PGPORT'),
+#     }
+# }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': config('DB_NAME'),
+#         'PASSWORD': config('DB_PASSWORD'),
+#         'HOST': config('DB_HOST'),
+#         'USER': config('DB_USER'),
+#         'PORT': config('DB_PORT'),
+#     }
+# }
 
 
 

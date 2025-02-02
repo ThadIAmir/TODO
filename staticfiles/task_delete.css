@@ -1,0 +1,61 @@
+/* General body styling */
+body {
+    font-family: 'Nunito', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+/* Card styling */
+.card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Confirmation message styling */
+.card p {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+/* Button styling */
+.card button {
+    background: #ff4d4d; /* Red color for delete action */
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.card button:hover {
+    background: #e60000; /* Darker red on hover */
+}
+
+/* Cancel link styling */
+.card a {
+    display: inline-block;
+    color: #667eea;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.card a:hover {
+    color: #5a6fd1;
+    text-decoration: underline;
+}
