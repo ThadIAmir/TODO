@@ -14,11 +14,6 @@ SECRET_KEY = config('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = [
-    "web-production-d168.up.railway.app"
-]
-CSRF_COOKIE_SECURE = True
-
 
 # Application definition
 
@@ -71,11 +66,11 @@ WSGI_APPLICATION = 'TODO.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'USER': config('DB_USER'),
-        'PORT': config('DB_PORT'),
+        'NAME': config('POSTGRES_DB'),
+        'PASSWORD': config('POSTGRES_PASSWORD'),
+        'HOST': config('PGHOST'),
+        'USER': config('POSTGRES_USER'),
+        'PORT': config('PGPORT'),
     }
 }
 
