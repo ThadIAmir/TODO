@@ -14,6 +14,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
+DEBUG = config('DEBUG')
+
 ALLOWED_HOSTS = ["web-production-d168.up.railway.app", "127.0.0.1", "localhost"]
 
 
@@ -147,5 +149,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CSRF_TRUSTED_ORIGINS = [
     "https://web-production-d168.up.railway.app",
 ]
-
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
 
