@@ -17,6 +17,7 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
     "web-production-d168.up.railway.app"
 ]
+CSRF_COOKIE_SECURE = True
 
 
 # Application definition
