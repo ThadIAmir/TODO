@@ -3,10 +3,13 @@ Django settings for TODO project.
 """
 import os
 from pathlib import Path
-from .local_settings import *
+from decouple import config
+# from .local_settings import *
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+SECRET_KEY = config('SECRET_KEY')
 
 ALLOWED_HOSTS = ['.vercel.app']
 
@@ -62,11 +65,11 @@ WSGI_APPLICATION = 'TODO.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'USER': DB_USER,
-        'PORT': DB_PORT,
+        'NAME': config('DB_NAME'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'USER': config('DB_USER'),
+        'PORT': config('DB_PORT'),
     }
 }
 
