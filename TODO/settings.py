@@ -148,6 +148,4 @@ CSRF_TRUSTED_ORIGINS = [
     "https://web-production-d168.up.railway.app",
 ]
 
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
