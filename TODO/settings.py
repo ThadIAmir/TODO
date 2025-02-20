@@ -17,7 +17,7 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-ALLOWED_HOSTS = ["web-production-d168.up.railway.app", "127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["todolistt.up.railway.app", "127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -148,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # -----------------
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://web-production-d168.up.railway.app",
+    "https://todolistt.up.railway.app",
 ]
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
