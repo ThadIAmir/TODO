@@ -7,10 +7,18 @@
 
 {% block content %}
     <form method="GET">
-        <input type="text" name="q" value={{ q }}>
+        <input type="text" name="q" value="{{ q }}">
+        <hr>
+        <select name="priority">
+            <option value="">All Priorities</option>
+            <option value="0" {% if current_priority == '0' %}selected{% endif %}>Very Urgent</option>
+            <option value="1" {% if current_priority == '1' %}selected{% endif %}>Urgent</option>
+            <option value="2" {% if current_priority == '2' %}selected{% endif %}>Whenever</option>
+        </select>
         <input type="submit" value="Search">
 
     </form>
+    <a href="{% url 'tasks' %}" style="display: block; text-align: center;">Clear Filters</a>
 
 
 {% endblock %}

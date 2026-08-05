@@ -53,7 +53,10 @@
         {% for task in tasks %}
         <tr>
             <td class="{% if task.complete %}completed-task{% endif %}">
-                {{ task.title }}
+                {{ task.title }} 
+                <p style="font-size: small; color: {% if task.priority == 0 %}red{% elif task.priority == 1 %}orange{% elif task.priority == 2 %}green{% else %}blueviolet{% endif %};">
+                Priority: {{ task.get_priority_display }}
+                </p>
             </td>
             <td><a href="{% url 'task-detail' task.id %}">View</a></td>
             <td><a href="{% url 'task-update' task.id %}">Edit</a></td>

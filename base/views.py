@@ -42,27 +42,56 @@ class RegisterView(FormView):
         return super(RegisterView, self).get(*args, **kwargs)
 
 
+# class TaskList(LoginRequiredMixin, ListView):
+#     model = Task
+#     context_object_name = 'tasks'
+#     template_name = 'base/task_list.html'
+
+#     def get_context_data(self, **kwargs):   
+#         context = super().get_context_data(**kwargs)
+#         context['tasks'] = Task.objects.filter(user = self.request.user)
+#         context['counts'] = context['tasks'].filter(complete=False).count()
+
+#         q = self.request.GET.get('q') or ''
+#         context['tasks'] = context['tasks'].filter(
+#             Q(title__icontains=q) | Q(description__icontains=q))
+#         context['q'] = q
+
+#         return context
+
 class TaskList(LoginRequiredMixin, ListView):
     model = Task
     context_object_name = 'tasks'
     template_name = 'base/task_list.html'
 
-    def get_context_data(self, **kwargs):   
+    def get_queryset(self):
+        queryset = Task.objects.filter(user=self.request.user)
+
+        q = self.request.GET.get('q')
+        if q:
+            queryset = queryset.filter(
+                Q(title__icontains=q) | Q(description__icontains=q)
+            )
+
+        priority = self.request.GET.get('priority')
+        if priority:
+            queryset = queryset.filter(priority=priority)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['tasks'] = Task.objects.filter(user = self.request.user)
+        
         context['counts'] = context['tasks'].filter(complete=False).count()
-
-        q = self.request.GET.get('q') or ''
-        context['tasks'] = context['tasks'].filter(
-            Q(title__icontains=q) | Q(description__icontains=q))
-        context['q'] = q
-
+        
+        context['q'] = self.request.GET.get('q', '')
+        context['current_priority'] = self.request.GET.get('priority', '')
+        
         return context
-
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    fields = ['title', 'description', 'complete', 'priority']
     template_name = 'base/task_create.html'
     success_url = reverse_lazy('tasks')
 
@@ -87,7 +116,7 @@ class TaskDetail(LoginRequiredMixin, DetailView):
 
 class TaskUpdate(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    fields = ['title', 'description', 'complete', 'priority']
     template_name = 'base/task_update.html'
     success_url = reverse_lazy('tasks')
 

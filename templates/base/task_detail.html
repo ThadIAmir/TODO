@@ -14,6 +14,9 @@
     <p class="description">
         Description: {% if task.description %} {{ task.description }} {% else %} - {% endif %}
     </p>
+    <p style="color: {% if task.priority == 0 %}red{% elif task.priority == 1 %}orange{% elif task.priority == 2 %}green{% else %}blueviolet{% endif %};">
+        Priority: {{ task.get_priority_display }}
+    </p>
     <p class="status {% if task.complete %}true{% else %}false{% endif %}">
         Completion Status: {% if task.complete %}Completed{% else %}Not Completed{% endif %}
     </p>
