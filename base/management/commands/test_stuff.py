@@ -26,17 +26,19 @@ class Command(BaseCommand):
         
         #Day2
         # queryset = Task.objects.filter(Q(title__icontains='test') | Q(description__icontains='test') & Q(complete=False))
-        queryset = User.objects.annotate(total_tasks_count=Count('task'), 
-                                         test_tasks_count=Count(
-                                             'task', 
-                                             filter=(Q(task__title__icontains='test')
-                                                    | Q(task__description__icontains='test')
-                                                    ) & 
-                                                    Q(task__complete=False)
-                                            )
-                                        ).filter(test_tasks_count__gt=0
-                                                 ).order_by('-total_tasks_count', '-test_tasks_count')
-        # print(len(queryset))
-        for user in queryset:
-            print(f'Username: {user.username} \ntotal tasks count: {user.total_tasks_count} \ntest tasks count: {user.test_tasks_count} \n')
-        print(queryset.query)
+        # queryset = User.objects.annotate(total_tasks_count=Count('task'), 
+        #                                  test_tasks_count=Count(
+        #                                      'task', 
+        #                                      filter=(Q(task__title__icontains='test')
+        #                                             | Q(task__description__icontains='test')
+        #                                             ) & 
+        #                                             Q(task__complete=False)
+        #                                     )
+        #                                 ).filter(test_tasks_count__gt=0
+        #                                          ).order_by('-total_tasks_count', '-test_tasks_count')
+        # # print(len(queryset))
+        # for user in queryset:
+        #     print(f'Username: {user.username} \ntotal tasks count: {user.total_tasks_count} \ntest tasks count: {user.test_tasks_count} \n')
+        # print(queryset.query)
+        
+        #Day3
