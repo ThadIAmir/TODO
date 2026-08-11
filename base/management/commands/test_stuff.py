@@ -41,4 +41,14 @@ class Command(BaseCommand):
         #     print(f'Username: {user.username} \ntotal tasks count: {user.total_tasks_count} \ntest tasks count: {user.test_tasks_count} \n')
         # print(queryset.query)
         
+        # queryset = Room.objects.annotate(
+        #     message_count=Count('messages'), 
+        #     active_message_count=Count('messages', filter=
+        #                                Q(messages__content__icontains='django') 
+        #                                | Q(messages__content__icontains='python')
+        #                                ),
+        #     reaction_count=Count('messages__reactions', distinct=True)
+        #     ).filter(Q(active_message_count__gt=0) | Q(reaction_count__gt=5)
+        #              ).order_by('-message_count', '-reaction_count')
+        
         #Day3
