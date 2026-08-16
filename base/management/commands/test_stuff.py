@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from django.db.models import F, Q, Case, ExpressionWrapper, FloatField, OuterRef, Subquery, Value, When
+from django.db.models import F, Q, Case, Exists, ExpressionWrapper, FloatField, OuterRef, Subquery, Value, When
 from django.db.models.aggregates import Count
 from base.models import Task
 from django.contrib.auth.models import User
@@ -79,7 +79,27 @@ class Command(BaseCommand):
         
         # ------------------------------------------------------------------------------------------
         
-        # Day4 -0 -0 -0 
+        # Day4 - Exists/~Exists
+        # Tasks1 = Task.objects.filter((Q(title__icontains='django') | Q(description__icontains='django')) & Q(complete=False), user=OuterRef('pk'))
+        # Tasks2 = Task.objects.filter((Q(title__icontains='python') | Q(description__icontains='python')) & Q(complete=True), user=OuterRef('pk'))
+        # users = User.objects.filter(Q(Exists(Tasks1)) & Q(~Exists(Tasks2)))
+        
+        # incomplete_tasks = Task.objects.filter(complete=False, user=OuterRef('pk'))
+        # users = User.objects.annotate(has_incomplete_tasks=Exists(incomplete_tasks))
+        # # print(users.query)
+        # for user in users:
+        #     print(f'{user.username} : has_incomplete_tasks? {user.has_incomplete_tasks}')
+        
+        # last_message = Message.objects.filter(room=OuterRef('id')).order_by('-created_at')[:1]        
+        # python_messages = Messaage.objects.filter(content__icontains='python', room=OuterRef('id'))
+        # Rooms = Room.objects.annotate(
+        #     message_count = Count('messages'),
+        #     last_message_content = Subquery(last_message.values('content')),
+        #     has_python_message = Exists(python_messages)
+        # ).filter(message_count__gte=10
+        #     ).order_by('-message_count')
+        
+        # ------------------------------------------------------------------------------------------
         
         # Day5
         
