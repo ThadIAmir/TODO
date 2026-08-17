@@ -109,11 +109,13 @@ class Command(BaseCommand):
         
         # Task.objects.annotate(time_difference=F('actual_minutes') - F('estimated_minutes'))
         
+        # first way:
         # avg_minutes = Task.objects.filter(user=OuterRef('pk')
         #                             ).values('user'
         #                                 ).annotate(diff=F('actual_minutes') - F('estimated_minutes')
         #                                     ).annotate(avg_mins=Avg('diff')
         #                                             ).values('avg_mins')
+        # 2nd way:
         # avg_minutes = (
         #     Task.objects
         #     .filter(user=OuterRef('pk'))
@@ -126,6 +128,21 @@ class Command(BaseCommand):
         #     .values('avg_mins')
         # )
         # users= User.objects.annotate(avg_minutes=Subquery(avg_minutes))
+        # third way:
+        # users = User.objects.annotate(
+        #     avg_minutes=Avg(
+        #         F("tasks__actual_minutes") - F("tasks__estimated_minutes")
+        #     )
+        # )
+        
+        # users = User.objects.annotate(
+        #     average_actual_time=Avg(F('tasks__actual_minutes')),
+        #     average_estimated_time=Avg(F('tasks__estimated_minutes'))
+        # ).filter(average_actual_time__gt=F('average_estimated_time'))
+        
+        # ------------------------------------------------------------------------------------------
+        
+        # Day6
         
         
         
