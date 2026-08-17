@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db.models import F, Q, Case, Exists, ExpressionWrapper, FloatField, OuterRef, Subquery, Value, When
-from django.db.models.aggregates import Count
+from django.db.models.lookups import GreaterThanOrEqual
+from django.db.models.aggregates import Avg, Count
 from base.models import Task
 from django.contrib.auth.models import User
 
@@ -101,7 +102,30 @@ class Command(BaseCommand):
         
         # ------------------------------------------------------------------------------------------
         
-        # Day5
+        # Day5 - F/Avg
+        # Task.objects.filter(GreaterThanOrEqual( F('actual_minutes'), F('estimated_minutes') * 2 ) )
+        # also we could do it like this too: 
+        # Task.objects.filter(actual_minutes__gte=F('estimated_minutes') * 2 )
+        
+        # Task.objects.annotate(time_difference=F('actual_minutes') - F('estimated_minutes'))
+        
+        # avg_minutes = Task.objects.filter(user=OuterRef('pk')
+        #                             ).values('user'
+        #                                 ).annotate(diff=F('actual_minutes') - F('estimated_minutes')
+        #                                     ).annotate(avg_mins=Avg('diff')
+        #                                             ).values('avg_mins')
+        # avg_minutes = (
+        #     Task.objects
+        #     .filter(user=OuterRef('pk'))
+        #     .values('user')
+        #     .annotate(
+        #         avg_mins=Avg(
+        #             F('actual_minutes') - F('estimated_minutes')
+        #         )
+        #     )
+        #     .values('avg_mins')
+        # )
+        # users= User.objects.annotate(avg_minutes=Subquery(avg_minutes))
         
         
         
