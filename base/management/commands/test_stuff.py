@@ -140,6 +140,14 @@ class Command(BaseCommand):
         #     average_estimated_time=Avg(F('tasks__estimated_minutes'))
         # ).filter(average_actual_time__gt=F('average_estimated_time'))
         
+        # Task.objects.update(
+        #     estimated_minutes=F('estimated_minutes') + 10
+        # )
+        
+        # qs = Task.objects.update(
+        #     priority=F('priority') + 1
+        # )
+        
         # ------------------------------------------------------------------------------------------
         
         # Day6
