@@ -6,8 +6,8 @@ from base.models import Task
 from django.contrib.auth.models import User
 
 
-class Command(BaseCommand):
-    def handle(self, *args, **options):
+# class Command(BaseCommand):
+    # def handle(self, *args, **options):
         # Day1 - annotate/Count/Case-When/ExpressionWrapper/F/
         # queryset = User.objects.annotate(total_tasks=Count('task', distinct=True),completed_tasks=Count('task', distinct=True, filter=Q(task__complete=True)),
         #                                  incomplete_tasks=Count('task', distinct=True, filter=Q(task__complete=False)),
@@ -150,7 +150,7 @@ class Command(BaseCommand):
         
         # ------------------------------------------------------------------------------------------
         
-        # Day6
+        # Day6 - None . its THE END . we shifted to a new project called Pulse . Bye my lovely todo
         
         
         
